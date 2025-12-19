@@ -1,0 +1,25 @@
+﻿<Window x:Class="WpfApp1.Okna.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.Okna"
+        mc:Ignorable="d"
+        Title="Window1" Height="450" Width="800">
+    <Grid>
+        <StackPanel Margin="250,0">
+            <Image Source="/Images/3.jpg" Height="100" />
+            <TextBlock Text="БОтинки" FontSize="25" Margin="10"/>
+            <TextBlock Text="Категория: Мужская обувь" FontSize="15" Margin="10"/>
+            <TextBlock Text="Производитель: Лфкш" FontSize="15" Margin="10"/>
+            <TextBlock Text="поставщик: обувь для вас" FontSize="15" Margin="10"/>
+            <TextBlock Text="Описание: Ботинки marco Tozzi женские демиезонные, размер 39, цвет бежевый" TextWrapping="Wrap" FontSize="15" Margin="10"/>
+            <StackPanel>
+
+                <TextBlock Text="4900 руб." Foreground="Red" TextDecorations="Strikethrough" TextWrapping="Wrap" FontSize="15" Margin="10"/>
+            </StackPanel>
+
+            
+        </StackPanel>
+    </Grid>
+</Window>
