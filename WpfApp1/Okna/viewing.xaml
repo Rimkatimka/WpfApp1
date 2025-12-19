@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.Okna"
         mc:Ignorable="d"
-        Title="Просмотр товаров" Height="450" Width="800">
+        Title="Просмотр товаров" Height="450" Width="800" MinHeight="450" MinWidth="1300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -39,5 +39,50 @@
             <Button Style="{StaticResource dd}" Margin="10" Content="Применить"/>
             <Button Style="{StaticResource dd}" Margin="10" Content="Сбросить"/>
         </StackPanel>
+        <ListView Grid.Row="1" Grid.Column="1" Name="ListTovars" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="3" BorderBrush="Black">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="0">
+                                <Image Stretch="Uniform" Source="{Binding Image}" Height="200" Width="300"/>
+                            </Border>
+                            <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="1" Background="{Binding Cvet}">
+
+                                <StackPanel >
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Category}" FontWeight="Bold" FontSize="25"/>
+                                        <TextBlock Text=" | " FontWeight="Bold" FontSize="25"/>
+                                        <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="25"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Description, StringFormat={} Описание товара: {0} }" FontSize="15" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Creator, StringFormat={} Производитель: {0}}" FontSize="15"/>
+                                    <TextBlock Text="{Binding Supplier, StringFormat={} Поставщик: {0}}" FontSize="15"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text=" Цена: " FontSize="15"/>
+                                        <TextBlock Text="{Binding Cost}" TextDecorations="{Binding Linia}" FontSize="15"/>
+                                        <TextBlock Text="{Binding CostNew, StringFormat={} Новая Цена: {0}}" Visibility="{Binding Vidno}" FontSize="15"/>
+                                    </StackPanel>
+
+                                    <TextBlock Text="{Binding UI, StringFormat={} Единица измерения: {0}}" FontSize="15"/>
+                                    <TextBlock Text="{Binding Count, StringFormat={} Количество на складе: {0}}" FontSize="15" />
+
+                                </StackPanel>
+                            </Border>
+                            <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="2">
+                                <TextBlock Text="{Binding Sale}" FontSize="30"/>
+                            </Border>
+                        </Grid>
+
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
     </Grid>
 </Window>

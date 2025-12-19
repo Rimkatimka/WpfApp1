@@ -11,17 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp1.DB;
 
 namespace WpfApp1.Okna
 {
     /// <summary>
     /// Логика взаимодействия для viewing.xaml
     /// </summary>
+    /// 
     public partial class viewing : Window
     {
+        
+        DemoMuhEntities db = new();
         public viewing()
         {
             InitializeComponent();
+            ListTovars.ItemsSource = db.Tovar.ToList();   
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
