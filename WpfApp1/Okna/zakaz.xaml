@@ -1,0 +1,50 @@
+﻿<Window x:Class="WpfApp1.Okna.zakaz"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.Okna"
+        mc:Ignorable="d"
+        Title="zakaz" Height="450" Width="800" MinHeight="450" MinWidth="1300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#7FFF00">
+
+            <TextBlock Text="Список заказов" HorizontalAlignment="Center" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
+                <TextBlock Text="ФИО пользователя" Margin="10" FontSize="18" VerticalAlignment="Center"/>
+                <Button Content="Назад" Style="{StaticResource dd}" Width="80" Margin="10" Click="Button_Click" FontSize="18"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="1" Background="#f0fff0" Margin="10">
+            <TextBlock Text="Фильтры" FontSize="18" Margin="10"/>
+            <TextBlock Text="Статус заказа" Margin="10" FontSize="12"/>
+            <ComboBox />
+            <TextBlock Text="Поиск по номеру / клиенту" Margin="10" FontSize="12"/>
+            <ComboBox/>
+
+            <TextBox Margin="0,10,0,0"/>
+
+            <Button Style="{StaticResource dd}" Margin="10" Content="Применить" Height="30"/>
+            <Button Style="{StaticResource dd}" Margin="10" Content="Сбросить" Height="30"/>
+        </StackPanel>
+        <DataGrid x:Name="ZakazList" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№ заказа" Width="auto" Binding="{Binding IDOrder}"/>
+                <DataGridTextColumn Header="Дата" Width="auto" Binding="{Binding DateDilivery}"/>
+                <DataGridTextColumn Header="Клиент" Width="auto" Binding="{Binding FIO}"/>
+                <DataGridTextColumn Header="Статус" Width="auto" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Суумма" Width="auto" Binding="{Binding Cost}"/>
+            </DataGrid.Columns>
+            
+        </DataGrid>
+        
+    </Grid>
+</Window>

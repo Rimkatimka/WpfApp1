@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище DemoMuhModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище DemoMuhModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Addresses">
           <Key>
             <PropertyRef Name="IDAddress" />
@@ -98,6 +98,18 @@
           <Property Name="FIO" Type="nvarchar" MaxLength="255" />
           <Property Name="Login" Type="nvarchar" MaxLength="255" />
           <Property Name="Password" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DemoMuh.dbo.View_1" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="View_1">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="int" Nullable="false" />
+          <Property Name="DateDilivery" Type="datetime" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" />
+          <Property Name="Cost" Type="float" />
         </EntityType>
         <Association Name="FK_Orders_Addresses">
           <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
@@ -219,6 +231,15 @@
           <EntitySet Name="Tovar" EntityType="Self.Tovar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UIes" EntityType="Self.UIes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_1" EntityType="Self.View_1" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[View_1].[IDOrder] AS [IDOrder], 
+[View_1].[DateDilivery] AS [DateDilivery], 
+[View_1].[FIO] AS [FIO], 
+[View_1].[Status] AS [Status], 
+[View_1].[Cost] AS [Cost]
+FROM [dbo].[View_1] AS [View_1]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Orders_Addresses" Association="Self.FK_Orders_Addresses">
             <End Role="Addresses" EntitySet="Addresses" />
             <End Role="Orders" EntitySet="Orders" />
@@ -256,8 +277,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DemoMuhModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -529,7 +549,18 @@
             <End Role="UIes" EntitySet="UIes" />
             <End Role="Tovar" EntitySet="Tovar" />
           </AssociationSet>
+          <EntitySet Name="View_1" EntityType="DemoMuhModel.View_1" />
         </EntityContainer>
+        <EntityType Name="View_1">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="Int32" Nullable="false" />
+          <Property Name="DateDilivery" Type="DateTime" Precision="3" />
+          <Property Name="FIO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Double" ConcurrencyMode="None" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -637,6 +668,17 @@
                 <ScalarProperty Name="FIO" ColumnName="FIO" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_1">
+            <EntityTypeMapping TypeName="DemoMuhModel.View_1">
+              <MappingFragment StoreEntitySet="View_1">
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="DateDilivery" ColumnName="DateDilivery" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

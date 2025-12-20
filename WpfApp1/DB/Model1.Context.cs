@@ -36,5 +36,6 @@ namespace WpfApp1.DB
         public DbSet<Tovar> Tovar { get; set; }
         public DbSet<UIes> UIes { get; set; }
         public DbSet<Users> Users { get; set; }
+        public DbSet<View_1> View_1 { get; set; }
     }
 }
