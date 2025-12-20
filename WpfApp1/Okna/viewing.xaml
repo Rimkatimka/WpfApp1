@@ -11,42 +11,48 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#7FFF00">
 
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#7FFF00">
             <TextBlock Text="Просмотр товаров" HorizontalAlignment="Center" FontSize="20" TextWrapping="Wrap"/>
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <TextBlock Text="ФИО пользователя" Margin="10"/>
                 <Button Content="Выход" Style="{StaticResource dd}" Width="80" Margin="10" Click="Button_Click"/>
             </StackPanel>
         </Grid>
+
         <StackPanel Grid.Row="1" Background="#f0fff0" Margin="10">
             <TextBlock Text="Фильтры" FontSize="18" Margin="10"/>
-            <TextBlock Text="Категория" Margin="10" FontSize="18"/>
-            
-            <ComboBox x:Name="ComboBoxCategory" Height="30" SelectionChanged="FilterCatChanged" DisplayMemberPath="Category" SelectedIndex="2"/>
 
-            <TextBlock Text="Производитель" Margin="10" FontSize="18"/>
-            <ComboBox x:Name="ComboBoxCreator" Height="30" SelectionChanged="FilterCreatChanged" DisplayMemberPath="Supplier" SelectedIndex="2"/>
+            <TextBlock Text="Категория" Margin="10,10,10,5" FontSize="18"/>
+            <ComboBox x:Name="ComboBoxCategory" Height="30" 
+                      SelectionChanged="FilterCatChanged" 
+                      DisplayMemberPath="Category"/>
 
-            <TextBlock Text="Цена - сортировка" Margin="10" FontSize="18"/>
-            <ComboBox x:Name="ComboBoxSort" Height="30">
-                <ComboBoxItem Content="По умолчанию"/>
+            <TextBlock Text="Производитель" Margin="10,10,10,5" FontSize="18"/>
+            <ComboBox x:Name="ComboBoxCreator" Height="30" 
+                      SelectionChanged="FilterCreatChanged" 
+                      DisplayMemberPath="Supplier"/>
+
+            <TextBlock Text="Цена - сортировка" Margin="10,10,10,5" FontSize="18"/>
+            <ComboBox x:Name="ComboBoxSort" Height="30" 
+                      SelectionChanged="SortSelectionChanged">
+                <ComboBoxItem Content="По умолчанию" IsSelected="True"/>
                 <ComboBoxItem Content="По возрастанию цены"/>
                 <ComboBoxItem Content="По убыванию цены"/>
             </ComboBox>
 
-            <TextBlock Text="Поиск по названию" Margin="10" FontSize="18"/>
-            <TextBox x:Name="TextBoxSearch" TextChanged="TextChanged"/>
+            <TextBlock Text="Поиск по названию" Margin="10,10,10,5" FontSize="18"/>
+            <TextBox x:Name="TextBoxSearch" TextChanged="TextChanged" Height="30"/>
 
             <Button Style="{StaticResource dd}" Margin="10" Content="Применить" Height="40" Click="ApplyFilters_Click"/>
             <Button Style="{StaticResource dd}" Margin="10" Content="Сбросить" Height="40" Click="ResetFilters_Click"/>
         </StackPanel>
+
         <ListView Grid.Row="1" Grid.Column="1" x:Name="ListTovars" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -61,8 +67,7 @@
                                 <Image Stretch="Uniform" Source="{Binding Image}" Height="200" Width="300"/>
                             </Border>
                             <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="1" Background="{Binding Cvet}">
-
-                                <StackPanel >
+                                <StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding Category}" FontWeight="Bold" FontSize="25"/>
                                         <TextBlock Text=" | " FontWeight="Bold" FontSize="25"/>
@@ -76,21 +81,17 @@
                                         <TextBlock Text="{Binding Cost}" TextDecorations="{Binding Linia}" Foreground="{Binding Krasn}" FontSize="15"/>
                                         <TextBlock Text="{Binding CostNew, StringFormat={} Новая Цена: {0}}" Visibility="{Binding Vidno}" FontSize="15"/>
                                     </StackPanel>
-
                                     <TextBlock Text="{Binding UI, StringFormat={} Единица измерения: {0}}" FontSize="15"/>
-                                    <TextBlock Text="{Binding Count, StringFormat={} Количество на складе: {0}}" FontSize="15" />
-
+                                    <TextBlock Text="{Binding Count, StringFormat={} Количество на складе: {0}}" FontSize="15"/>
                                 </StackPanel>
                             </Border>
                             <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="2">
                                 <TextBlock Text="{Binding Sale}" FontSize="30"/>
                             </Border>
                         </Grid>
-
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
     </Grid>
 </Window>
