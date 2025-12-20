@@ -4,25 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.Okna"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
-        Title="Авторизация" Height="600" Width="800">
+        Title="Авторизация" Height="600" Width="500">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Label Content="Авторизация" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
         <StackPanel Grid.Row="1">
-            <Label Content="kjuby" Padding="30" FontSize="30"/>
-            <TextBlock HorizontalAlignment="Center" Width="500"/>
-            <Label Content="gfhjkm" Padding="30" FontSize="30"/>
-            <TextBlock HorizontalAlignment="Center" Width="500"/>
+            <Label Content="Логин" Padding="30" FontSize="30"/>
+            <TextBox Margin="50,0,50,0" Height="50" BorderBrush="Black" Name="Login"/>
+            <Label Content="Пароль" Padding="30" FontSize="30"/>
+            <TextBox Margin="50,0,50,0" Height="50" BorderBrush="Black" Name="Password"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-
-            <Button Style="{StaticResource dd}" Content="Войти" Width="100" Margin="10,5" Click="Button_Click"/>
-            <Button Style="{StaticResource dd}" Content="Войти как гость" Width="100" Margin="10,5" Click="Button_Click_1"/>
+            <Button Style="{StaticResource dd}" Content="Войти" Width="200" Padding="10" Margin="0,0,25,0" Click="Button_Click" FontSize="26"/>
+            <Button Style="{StaticResource dd}" Content="Войти как гость" Width="200" Padding="10" Click="Button_Click_1" FontSize="26"/>
         </StackPanel>
+        <Image gif:ImageBehavior.AnimatedSource="/Images/foxy.gif" gif:ImageBehavior.RepeatBehavior="1x" x:Name="Giff" Grid.Row="1"
+               gif:ImageBehavior.AutoStart="False" Visibility="Hidden" gif:ImageBehavior.AnimationCompleted="Giff_AnimationCompleted"/>
     </Grid>
 </Window>

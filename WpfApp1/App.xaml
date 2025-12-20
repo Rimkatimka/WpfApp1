@@ -19,6 +19,12 @@
             <!--<Setter Property="Height" Value="50"/>-->
             <Setter Property="FontFamily" Value="Times New Roman"/>
         </Style>
-        
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+        </Style>
+
     </Application.Resources>
 </Application>
