@@ -29,9 +29,7 @@
             <TextBlock Text="Фильтры" FontSize="18" Margin="10"/>
 
             <TextBlock Text="Категория" Margin="10,10,10,5" FontSize="18"/>
-            <ComboBox x:Name="ComboBoxCategory" Height="30" 
-                      SelectionChanged="FilterCatChanged" 
-                      DisplayMemberPath="Category"/>
+            <ComboBox x:Name="ComboBoxCategory" Height="30"/>
 
             <TextBlock Text="Производитель" Margin="10,10,10,5" FontSize="18"/>
             <ComboBox x:Name="ComboBoxCreator" Height="30" 
@@ -49,7 +47,7 @@
             <TextBlock Text="Поиск по названию" Margin="10,10,10,5" FontSize="18"/>
             <TextBox x:Name="TextBoxSearch" TextChanged="TextChanged" Height="30"/>
 
-            <Button Style="{StaticResource dd}" Margin="10" Content="Применить" Height="40" Click="ApplyFilters_Click"/>
+            <Button Style="{StaticResource dd}" Margin="10" Content="Применить" Height="40"/>
             <Button Style="{StaticResource dd}" Margin="10" Content="Сбросить" Height="40" Click="ResetFilters_Click"/>
         </StackPanel>
 
