@@ -1,0 +1,35 @@
+﻿<Window x:Class="WpfApp1.Okna.TovarAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.Okna"
+        mc:Ignorable="d"
+        Title="TovarAdd" Height="750" Width="400">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="ID" FontSize="18" Margin="10"/>
+            <TextBox x:Name="TextBoxArticul"  Height="40"/>
+            
+            <TextBlock Text="Название" FontSize="18" Margin="10"/>
+            <TextBox x:Name="TextBoxName"  Height="40"/>
+
+            <TextBlock Text="Категория" FontSize="18" Margin="10"/>
+            <ComboBox x:Name="ComboBoxCategory"  Height="40" DisplayMemberPath="Category"/>
+
+            <TextBlock Text="Цена" FontSize="18" Margin="10"/>
+            <TextBox x:Name="TextBoxCost"  Height="40"/>
+
+            <TextBlock Text="Количество" FontSize="18" Margin="10"/>
+            <TextBox x:Name="TextBoxCount"  Height="40"/>
+
+            <TextBlock Text="Скидка(%)" FontSize="18" Margin="10"/>
+            <TextBox x:Name="TextBoxSale"  Height="40"/>
+
+            <TextBlock Text="Изображение" FontSize="18" Margin="10"/>
+            <Button x:Name="ButtonImageAdd" Content="Выбрать файл" Height="40" Margin="10" Style="{StaticResource dd}" Click="ButtonImageAdd_Click"/>
+
+            <Button x:Name="ButtonSave" Content="Сохранить" Height="40" Margin="10" Style="{StaticResource dd}" Click="ButtonSave_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

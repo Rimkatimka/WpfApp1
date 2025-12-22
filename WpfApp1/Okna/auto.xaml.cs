@@ -34,7 +34,7 @@ namespace WpfApp1.Okna
             if (user != null)
             {
                 Window window = new Window();
-                window = new viewing();
+                window = new viewing(db.Users.FirstOrDefault(u => u.Login == Login.Text && u.Password == Password.Text));
                 window.Show();
                 Close();
             }
@@ -60,7 +60,8 @@ namespace WpfApp1.Okna
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window = new viewing();
+
+            window = new viewing(null);
             window.Show();
             Close();
         }

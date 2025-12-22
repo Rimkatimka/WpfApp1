@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WpfApp1"
-             StartupUri="okna/viewing.xaml">
+             StartupUri="okna/auto.xaml">
     <Application.Resources>
         <SolidColorBrush Color="#00FA9A" x:Key="ff"/>
         <Style TargetType="{x:Type Control}" x:Key="ControlStyle">

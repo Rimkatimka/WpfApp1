@@ -12,13 +12,41 @@ namespace WpfApp1.Okna
         DemoMuhEntities db = new();
         private List<Tovar> allTovars; // Кэшируем все товары для производительности
 
-        public viewing()
+        public viewing(Users user)
         {
             InitializeComponent();
+            AddButton.Visibility = Visibility.Hidden;
+            ResetButton.Visibility = Visibility.Hidden;
+            DeleteButton.Visibility = Visibility.Hidden;
+            Filters.Visibility = Visibility.Hidden;
+            ListTovars.MouseDoubleClick -= ListTovars_MouseDoubleClick;
+            if (user != null)
+            {
+                TextBoxFIO.Text = user.FIO;
+
+                if (user.Role == "Администратор")
+                {
+                    AddButton.Visibility = Visibility.Visible;
+                    ResetButton.Visibility = Visibility.Visible;
+                    DeleteButton.Visibility = Visibility.Visible;
+                    Filters.Visibility = Visibility.Visible;
+                    ListTovars.MouseDoubleClick += ListTovars_MouseDoubleClick;
+                }
+                if (user.Role == "Менеджер")
+                {
+                    Filters.Visibility = Visibility.Visible;
+                }
+            }
+            
+            Update();
+        }
+        public void Update()
+        {
+            ListTovars.ItemsSource = null;
+
 
             allTovars = db.Tovar.ToList();
 
-            ComboBoxCategory.ItemsSource = db.Categories.ToList();
             ComboBoxCreator.ItemsSource = db.Suppliers.ToList();
 
             ComboBoxSort.SelectedIndex = 0;
@@ -39,22 +67,6 @@ namespace WpfApp1.Okna
 
             var filtered = allTovars.AsQueryable();
 
-            //if (ComboBoxCategory.SelectedItem is Categories selectedCategory)
-            //{
-            //    filtered = filtered.Where(p => p.Categories != null &&
-            //                                   p.Categories.Category == selectedCategory.Category);
-            //}
-
-            //if (ComboBoxCreator.SelectedItem is ComboBoxItem supItem &&
-            //    supItem.Tag?.ToString() == "По умолчанию")
-            //{
-
-            //}
-            //else if(ComboBoxCreator.SelectedItem is Suppliers selectedSupplier)
-            //{
-            //    filtered = filtered.Where(p => p.Suppliers != null &&
-            //                                   p.Suppliers.Supplier == selectedSupplier.Supplier);
-            //}
             if (ComboBoxCreator.SelectedItem is Suppliers selectedSupplier)
             {
                 if (selectedSupplier.Supplier != "По умолчанию")
@@ -94,14 +106,12 @@ namespace WpfApp1.Okna
             return items;
         }
 
-        //private void FilterCatChanged(object sender, EventArgs e) => ApplyFiltersAndSort();
         private void FilterCreatChanged(object sender, EventArgs e) => ApplyFiltersAndSort();
         private void SortSelectionChanged(object sender, EventArgs e) => ApplyFiltersAndSort();
         private void TextChanged(object sender, EventArgs e) => ApplyFiltersAndSort();
 
         private void ResetFilters_Click(object sender, RoutedEventArgs e)
         {
-            ComboBoxCategory.SelectedIndex = -1;
             ComboBoxCreator.SelectedIndex = -1;
             TextBoxSearch.Clear();
             ComboBoxSort.SelectedIndex = 0;
@@ -113,98 +123,43 @@ namespace WpfApp1.Okna
         {
             ApplyFiltersAndSort();
         }
-        //DemoMuhEntities db = new();
-        //private List<Tovar> list;
 
-        //public viewing()
-        //{
-        //    InitializeComponent();
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new TovarAdd(db, null).ShowDialog();
+            ListTovars.SelectedItem = null;
+            Update();
+        }
 
-        //    list = db.Tovar.ToList();
+        private void ListTovars_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            new TovarAdd(db, ListTovars.SelectedItem as Tovar).ShowDialog();
+            Update();
+        }
 
-        //    ComboBoxCreator.ItemsSource = new[] { "По умолчанию" }
-        //        .Concat(db.Suppliers.Select(s => s.Supplier))
-        //        .ToList();
+        private void DeleteButtonc(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ListTovars.SelectedItem is Tovar selected)
+                {
+                    if (MessageBox.Show("Точно хотите удалитьб?", "Подтверждение", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                    {
+                        try
+                        {
 
-
-        //    foreach (var item in list)
-        //    {
-        //        ListTovars.Items.Add(item);
-        //    }
-        //}
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    new auto().Show();
-        //    Close();
-        //}
-        //void SearchTovar()
-        //{
-        //    if (list != null)
-        //    {
-        //        var result = list;
-
-        //        if (!string.IsNullOrEmpty(TextBoxSearch.Text))
-        //        {
-        //            result = result.
-        //                Where(w => w.Name.ToLower().
-        //                StartsWith(TextBoxSearch.Text.ToLower())).
-        //                ToList();
-        //        }
-
-        //        if (ComboBoxCreator.SelectedIndex != -1 && ComboBoxCreator.SelectedIndex != 0)
-        //        {
-        //            result = result.
-        //                Where(w => w.Supplier.
-        //                StartsWith(ComboBoxCreator.Text)).
-        //                ToList();
-        //        }
-
-        //        if (ComboBoxSort.SelectedIndex == 0)
-        //        {
-        //            result = result.
-        //                OrderBy(o => o.Count).
-        //                ToList();
-        //        }
-
-        //        if (ComboBoxSort.SelectedIndex == 1)
-        //        {
-        //            result = result.
-        //                OrderByDescending(o => o.Count).
-        //                ToList();
-        //        }
-
-        //        ListTovars.Items.Clear();
-
-        //        foreach (var item in result)
-        //        {
-        //            ListTovars.Items.Add(item);
-        //        }
-        //    }
-        //}
-
-        //private void TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    SearchTovar();
-        //}
-
-        //private void FilterChanged(object sender, EventArgs e)
-        //{
-        //    SearchTovar();
-        //}
-
-        //private void SortSelectionChanged(object sender, EventArgs e)
-        //{
-        //    SearchTovar();
-        //}
-        //private void ResetFilters_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ComboBoxCategory.SelectedIndex = -1;
-        //    ComboBoxCreator.SelectedIndex = -1;
-        //    TextBoxSearch.Clear();
-        //    ComboBoxSort.SelectedIndex = 0;
-
-        //    SearchTovar();
-        //}
+                            db.Tovar.Remove(selected);
+                            db.SaveChanges();
+                            Update();
+                        }
+                        catch(Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
     }
 }

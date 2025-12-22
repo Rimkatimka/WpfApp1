@@ -20,16 +20,13 @@
         <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#7FFF00">
             <TextBlock Text="Просмотр товаров" HorizontalAlignment="Center" FontSize="20" TextWrapping="Wrap"/>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <TextBlock Text="ФИО пользователя" Margin="10"/>
+                <TextBlock Text="Гость" Margin="10" x:Name="TextBoxFIO"/>
                 <Button Content="Выход" Style="{StaticResource dd}" Width="80" Margin="10" Click="Button_Click"/>
             </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="1" Background="#f0fff0" Margin="10">
+        <StackPanel Grid.Row="1" Background="#f0fff0" Margin="10" Name="Filters">
             <TextBlock Text="Фильтры" FontSize="18" Margin="10"/>
-
-            <TextBlock Text="Категория" Margin="10,10,10,5" FontSize="18"/>
-            <ComboBox x:Name="ComboBoxCategory" Height="30"/>
 
             <TextBlock Text="Производитель" Margin="10,10,10,5" FontSize="18"/>
             <ComboBox x:Name="ComboBoxCreator" Height="30" 
@@ -47,11 +44,12 @@
             <TextBlock Text="Поиск по названию" Margin="10,10,10,5" FontSize="18"/>
             <TextBox x:Name="TextBoxSearch" TextChanged="TextChanged" Height="30"/>
 
-            <Button Style="{StaticResource dd}" Margin="10" Content="Применить" Height="40"/>
-            <Button Style="{StaticResource dd}" Margin="10" Content="Сбросить" Height="40" Click="ResetFilters_Click"/>
+            <Button Style="{StaticResource dd}" Margin="10" Content="Добавить" Name="AddButton" Height="40" Click="Button_Click_1"/>
+            <Button Style="{StaticResource dd}" Margin="10" Content="Сбросить" Name="ResetButton" Height="40" Click="ResetFilters_Click"/>
+            <Button Style="{StaticResource dd}" Margin="10" Content="Удалить" Name="DeleteButton" Height="40" Click="DeleteButtonc"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="1" x:Name="ListTovars" HorizontalContentAlignment="Stretch">
+        <ListView Grid.Row="1" Grid.Column="1" x:Name="ListTovars" HorizontalContentAlignment="Stretch" MouseDoubleClick="ListTovars_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="3" BorderBrush="Black">

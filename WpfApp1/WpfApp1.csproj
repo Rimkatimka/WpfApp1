@@ -139,6 +139,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Okna\TovarAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Okna\viewing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +159,9 @@
   <ItemGroup>
     <Compile Include="Okna\auto.xaml.cs">
       <DependentUpon>auto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Okna\TovarAdd.xaml.cs">
+      <DependentUpon>TovarAdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Okna\viewing.xaml.cs">
       <DependentUpon>viewing.xaml</DependentUpon>

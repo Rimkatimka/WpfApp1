@@ -26,9 +26,7 @@ namespace WpfApp1.Okna
         public zakaz()
         {
             InitializeComponent();
-            //DataContext = db.Users;
             ZakazList.ItemsSource = db.View_1.AsNoTracking().ToList();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -37,6 +35,11 @@ namespace WpfApp1.Okna
             window = new auto();
             window.Show();
             Close();
+        }
+
+        private void AddButtonClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
