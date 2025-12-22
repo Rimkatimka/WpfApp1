@@ -50,7 +50,7 @@
             <Button Style="{StaticResource dd}" Margin="10" Content="Заказы" Name="ZakazButton" Height="40" Click="ZakazButton_Click"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="1" x:Name="ListTovars" HorizontalContentAlignment="Stretch" MouseDoubleClick="ListTovars_MouseDoubleClick">
+        <ListView ScrollViewer.CanContentScroll="False" Grid.Row="1" Grid.Column="1" x:Name="ListTovars" HorizontalContentAlignment="Stretch" MouseDoubleClick="ListTovars_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="3" BorderBrush="Black">
@@ -63,7 +63,7 @@
                             <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="0">
                                 <Image Stretch="Uniform" Source="{Binding Image}" Height="200" Width="300"/>
                             </Border>
-                            <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="1" Background="{Binding Cvet}">
+                            <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="1" Background="{Binding Cvet1}">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding Category}" FontWeight="Bold" FontSize="25"/>
@@ -79,7 +79,7 @@
                                         <TextBlock Text="{Binding CostNew, StringFormat={} Новая Цена: {0}}" Visibility="{Binding Vidno}" FontSize="15"/>
                                     </StackPanel>
                                     <TextBlock Text="{Binding UI, StringFormat={} Единица измерения: {0}}" FontSize="15"/>
-                                    <TextBlock Text="{Binding Count, StringFormat={} Количество на складе: {0}}" FontSize="15"/>
+                                    <TextBlock Text="{Binding Count, StringFormat={} Количество на складе: {0}}" Background="{Binding Cvet2}" FontSize="15"/>
                                 </StackPanel>
                             </Border>
                             <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="2">

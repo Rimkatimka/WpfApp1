@@ -36,7 +36,6 @@ namespace WpfApp1.Okna
                 isNew = true;
                 ComboBoxAddress.ItemsSource = db.Addresses.ToList();
                 ComboBoxStatus.ItemsSource = db.Statuses.ToList();
-
             }
             else
             {                
@@ -61,7 +60,7 @@ namespace WpfApp1.Okna
                     order.Articul = (TextBoxArticul.Text.Trim());
                 }
                 order.Articul = TextBoxArticul.Text;
-                order.Orders.Status = db.Statuses.Where(p=> p.Status == ComboBoxStatus.Text.ToString());
+                //order.Orders.Status = db.Statuses.Where(p=> p.Status == ComboBoxStatus.Text.ToString());
                 order.Orders.AddressDilivery = ComboBoxAddress.SelectedIndex;
                 order.Orders.DateOrder = DPDateOrder.SelectedDate;
                 order.Orders.DateDilivery = DPDateDilivery.SelectedDate;
