@@ -47,6 +47,7 @@
             <Button Style="{StaticResource dd}" Margin="10" Content="Добавить" Name="AddButton" Height="40" Click="Button_Click_1"/>
             <Button Style="{StaticResource dd}" Margin="10" Content="Сбросить" Name="ResetButton" Height="40" Click="ResetFilters_Click"/>
             <Button Style="{StaticResource dd}" Margin="10" Content="Удалить" Name="DeleteButton" Height="40" Click="DeleteButtonc"/>
+            <Button Style="{StaticResource dd}" Margin="10" Content="Заказы" Name="ZakazButton" Height="40" Click="ZakazButton_Click"/>
         </StackPanel>
 
         <ListView Grid.Row="1" Grid.Column="1" x:Name="ListTovars" HorizontalContentAlignment="Stretch" MouseDoubleClick="ListTovars_MouseDoubleClick">

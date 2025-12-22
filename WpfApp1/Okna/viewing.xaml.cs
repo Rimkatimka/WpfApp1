@@ -161,5 +161,12 @@ namespace WpfApp1.Okna
             }
             catch { }
         }
+
+        private void ZakazButton_Click(object sender, RoutedEventArgs e)
+        {
+            zakaz win = new zakaz();
+            win.Show();
+            Close();
+        }
     }
 }

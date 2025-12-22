@@ -30,43 +30,7 @@ namespace WpfApp1.DB
         public Nullable<double> Count { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
-        public double? CostNew
-        {
-            get
-            {
-                return (Sale > 0) ? (Cost - (Cost * (Sale / 100))) : Cost;
-            }
-        }
-
-        public string Cvet
-        {
-            get
-            {
-                return (Sale > 15) ? "#2E8B57" : "white";
-            }
-        }
-        public string Linia
-        {
-            get
-            {
-                return (Sale > 0) ? "Strikethrough" : "None";
-            }
-        }
-        public string Vidno
-        {
-            get
-            {
-                return (Sale != 0) ? "Visible" : "Hidden";
-            }
-        }
-        public string Krasn
-        {
-            get
-            {
-                return (Sale > 0) ? "Red" : "Black";
-            }
-        }
-
+    
         public virtual Categories Categories { get; set; }
         public virtual ICollection<OrderTovar> OrderTovar { get; set; }
         public virtual Suppliers Suppliers { get; set; }

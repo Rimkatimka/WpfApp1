@@ -25,7 +25,7 @@
         <AssociationConnector Association="DemoMuhModel.FK_Users_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="DemoMuhModel.FK_Tovar_Suppliers" ManuallyRouted="false" />
         <AssociationConnector Association="DemoMuhModel.FK_Tovar_UIes" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DemoMuhModel.View_1" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DemoMuhModel.View_1" Width="1.5" PointX="7.125" PointY="7.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

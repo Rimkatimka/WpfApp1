@@ -26,7 +26,7 @@ namespace WpfApp1.Okna
         public zakaz()
         {
             InitializeComponent();
-            ZakazList.ItemsSource = db.View_1.AsNoTracking().ToList();
+            ZakazList.ItemsSource = db.OrderTovar.ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -39,7 +39,7 @@ namespace WpfApp1.Okna
 
         private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-
+            new ZakazAdd(db,ZakazList.SelectedItem as OrderTovar).ShowDialog();
         }
     }
 }

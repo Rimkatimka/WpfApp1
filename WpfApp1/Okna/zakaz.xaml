@@ -29,16 +29,32 @@
             <Button Style="{StaticResource dd}" Margin="10" Content="Добавить" Height="30" Click="AddButtonClick"/>
             <Button Style="{StaticResource dd}" Margin="10" Content="Редактировать" Height="30" Click="AddButtonClick"/>
         </StackPanel>
-        <DataGrid x:Name="ZakazList" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="№ заказа" Width="auto" Binding="{Binding IDOrder}"/>
-                <DataGridTextColumn Header="Дата" Width="auto" Binding="{Binding DateDilivery}"/>
-                <DataGridTextColumn Header="Клиент" Width="auto" Binding="{Binding FIO}"/>
-                <DataGridTextColumn Header="Статус" Width="auto" Binding="{Binding Status}"/>
-                <DataGridTextColumn Header="Суумма" Width="auto" Binding="{Binding Cost}"/>
-            </DataGrid.Columns>
-            
-        </DataGrid>
-        
+        <ListView Grid.Row="1" Grid.Column="1" x:Name="ZakazList" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="3" BorderBrush="Black">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>                            
+                            <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="0">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Articul, StringFormat={} Артикул заказа: {0}}" FontWeight="Bold" FontSize="15"/>
+                                    <TextBlock Text="{Binding Orders.Status, StringFormat={} Статус заказа: {0}}" FontSize="15"/>
+                                    <TextBlock Text="{Binding Orders.AddressDilivery, StringFormat={} Адресс пункта выдачи: {0}}" FontSize="15"/>
+                                    <TextBlock Text="{Binding Orders.DateOrder, StringFormat={} Дата заказа: {0}}" FontSize="15"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="1">
+                                <TextBlock Text="{Binding Orders.DateDilivery}" FontSize="30"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Window>
