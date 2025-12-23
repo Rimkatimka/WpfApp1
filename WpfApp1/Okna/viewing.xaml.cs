@@ -16,10 +16,10 @@ namespace WpfApp1.Okna
         {
             InitializeComponent();
             user1 = user;
-            AddButton.Visibility = Visibility.Hidden;
-            ResetButton.Visibility = Visibility.Hidden;
-            DeleteButton.Visibility = Visibility.Hidden;
-            Filters.Visibility = Visibility.Hidden;
+            AddButton.Visibility = Visibility.Collapsed;
+            ResetButton.Visibility = Visibility.Collapsed;
+            DeleteButton.Visibility = Visibility.Collapsed;
+            Filters.Visibility = Visibility.Collapsed;
             ListTovars.MouseDoubleClick -= ListTovars_MouseDoubleClick;
             if (user != null)
             {

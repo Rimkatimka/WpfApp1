@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -28,6 +29,18 @@ namespace WpfApp1.Okna
         {
             user = user1;
             InitializeComponent();
+            TextBoxFIO.Text = user.FIO;
+
+            AddButton.Visibility = Visibility.Collapsed;
+            DeleteButton.Visibility = Visibility.Collapsed;
+            ZakazList.MouseDoubleClick -= ZakazList_MouseDoubleClick;
+
+            if (user.Role == "Администратор")
+            {
+                AddButton.Visibility = Visibility.Visible;
+                DeleteButton.Visibility = Visibility.Visible;
+                ZakazList.MouseDoubleClick += ZakazList_MouseDoubleClick;
+            }
             Update();
         }
         public void Update()
@@ -37,20 +50,19 @@ namespace WpfApp1.Okna
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new Window();
-            window = new auto();
+            viewing window = new viewing(user);
             window.Show();
             Close();
         }
 
         private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            new ZakazAdd(db, null,user).ShowDialog();
+            new ZakazAdd(db, null, user).ShowDialog();
         }
 
         private void ZakazList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ZakazAdd(db, ZakazList.SelectedItem as OrderTovar,user).ShowDialog();
+            new ZakazAdd(db, ZakazList.SelectedItem as OrderTovar, user).ShowDialog();
             Update();
         }
         private void DeleteButtonc(object sender, RoutedEventArgs e)
@@ -59,7 +71,7 @@ namespace WpfApp1.Okna
             {
                 if (ZakazList.SelectedItem is OrderTovar selected)
                 {
-                    if (MessageBox.Show("Точно хотите удалитьб?", "Подтверждение", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                    if (MessageBox.Show("Точно хотите удалить?", "Подтверждение", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                     {
                         try
                         {

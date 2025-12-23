@@ -18,6 +18,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#7FFF00">
+            <Image Source="/Images/Icon.png" HorizontalAlignment="Left"/>
             <TextBlock Text="Просмотр товаров" HorizontalAlignment="Center" FontSize="20" TextWrapping="Wrap"/>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <TextBlock Text="Гость" Margin="10" x:Name="TextBoxFIO"/>

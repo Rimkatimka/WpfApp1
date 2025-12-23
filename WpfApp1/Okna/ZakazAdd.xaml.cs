@@ -34,6 +34,7 @@ namespace WpfApp1.Okna
 
             db = context;
 
+            
             if (order1 == null)
             {
                 ordertovar = new OrderTovar();
@@ -57,13 +58,16 @@ namespace WpfApp1.Okna
                 ComboBoxStatus.Text = order1.Orders.Status.ToString();
 
                 DPDateDilivery.SelectedDate = order1.Orders.DateDilivery;
-                DPDateOrder.SelectedDate = order1.Orders.DateOrder;                    
+                DPDateOrder.SelectedDate = order1.Orders.DateOrder;
+
+                ComboBoxArticul.Visibility = Visibility.Collapsed;
+
             }
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            try
+                        try
             {
                 if (isNew)
                 {
@@ -93,7 +97,7 @@ namespace WpfApp1.Okna
                 else
                 {
                     ordertovar.Articul = ComboBoxArticul.Text;
-                    ordertovar.Orders.Status = ComboBoxStatus.SelectedItem.ToString();
+                    ordertovar.Orders.Status = ComboBoxStatus.Text;
                     ordertovar.Orders.AddressDilivery = ComboBoxAddress.SelectedIndex + 1;
                     ordertovar.Orders.DateOrder = DPDateOrder.SelectedDate;
                     ordertovar.Orders.DateDilivery = DPDateDilivery.SelectedDate;

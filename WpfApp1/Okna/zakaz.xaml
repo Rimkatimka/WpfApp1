@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.Okna"
         mc:Ignorable="d"
-        Title="zakaz" Height="450" Width="800" MinHeight="450" MinWidth="1300">
+        Title="zakaz" Height="800" Width="800" MinHeight="450" MinWidth="1300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -16,19 +16,19 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#7FFF00">
+            <Image Source="/Images/Icon.png" HorizontalAlignment="Left"/>
 
             <TextBlock Text="Список заказов" HorizontalAlignment="Center" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Center"/>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
-                <TextBlock Text="ФИО пользователя" Margin="10" FontSize="18" VerticalAlignment="Center"/>
+                <TextBlock Text="ФИО пользователя" Margin="10" FontSize="18" VerticalAlignment="Center" Name="TextBoxFIO"/>
                 <Button Content="Назад" Style="{StaticResource dd}" Width="80" Margin="10" Click="Button_Click" FontSize="18"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="1" Background="#f0fff0" Margin="10">
 
 
-            <Button Style="{StaticResource dd}" Margin="10" Content="Добавить" Height="30" Click="AddButtonClick"/>
-            <Button Style="{StaticResource dd}" Margin="10" Content="Редактировать" Height="30" Click="AddButtonClick"/>
-            <Button Style="{StaticResource dd}" Margin="10" Content="Удаление" Height="30" Click="DeleteButtonc"/>
+            <Button Style="{StaticResource dd}" x:Name="AddButton" Margin="10" Content="Добавить" Height="30" Click="AddButtonClick"/>
+            <Button Style="{StaticResource dd}" x:Name="DeleteButton" Margin="10" Content="Удаление" Height="30" Click="DeleteButtonc"/>
         </StackPanel>
         <ListView Grid.Row="1" Grid.Column="1" x:Name="ZakazList" HorizontalContentAlignment="Stretch" MouseDoubleClick="ZakazList_MouseDoubleClick">
             <ListView.ItemTemplate>
@@ -41,15 +41,15 @@
                             </Grid.ColumnDefinitions>                            
                             <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="0">
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Articul, StringFormat={} Артикул заказа: {0}}" FontWeight="Bold" FontSize="15"/>
+                                    <TextBlock Text="{Binding Articul, StringFormat={} Артикул товара: {0}}" FontWeight="Bold" FontSize="15"/>
                                     <TextBlock Text="{Binding Orders.Status, StringFormat={} Статус заказа: {0}}" FontSize="15"/>
                                     <TextBlock Text="{Binding Orders.AddressDilivery, StringFormat={} Адресс пункта выдачи: {0}}" FontSize="15"/>
-                                    <TextBlock Text="{Binding Orders.DateOrder, StringFormat={} Дата заказа: {0}}" FontSize="15"/>
+                                    <TextBlock Text="{Binding Orders.DateOrder, StringFormat={} Дата заказа: {0:dd/MM/yyyy}}" FontSize="15"/>
                                 </StackPanel>
                             </Border>
                             
                             <Border Margin="7,5" BorderThickness="3" BorderBrush="Black" Grid.Column="1">
-                                <TextBlock Text="{Binding Orders.DateDilivery}" FontSize="30"/>
+                                <TextBlock Text="{Binding Orders.DateDilivery, StringFormat={}{0:dd/MM/yyyy}}" FontSize="30"/>
                             </Border>
                         </Grid>
                     </Border>

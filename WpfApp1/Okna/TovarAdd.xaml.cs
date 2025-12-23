@@ -64,7 +64,8 @@ namespace WpfApp1.Okna
                 tovar1.Cost = Convert.ToDouble(TextBoxCost.Text);
                 tovar1.Count = Convert.ToDouble(TextBoxCount.Text);
                 tovar1.Sale = Convert.ToDouble(TextBoxSale.Text);
-                tovar1.Image = "/images/pictures.png";
+                tovar1.Image = @"\images\pictures.png";
+                tovar1.Image = dialogimage;
                 if (isNew)
                 {
                     db.Tovar.Add(tovar1);
@@ -74,7 +75,7 @@ namespace WpfApp1.Okna
             }
             catch { }
         }
-
+        private string dialogimage;
         private void ButtonImageAdd_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new Microsoft.Win32.OpenFileDialog();
@@ -84,6 +85,7 @@ namespace WpfApp1.Okna
             if (result == true)
             {
                 tovar1.Image = dialog.FileName;
+                dialogimage = dialog.FileName;
             }
 
         }
