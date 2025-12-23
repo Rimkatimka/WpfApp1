@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,29 +24,38 @@ namespace WpfApp1.Okna
     public partial class ZakazAdd : Window
     {        
         DemoMuhEntities db = new();
-        public OrderTovar order;
+        public OrderTovar ordertovar;
         private bool isNew;
-        public ZakazAdd(DemoMuhEntities context, OrderTovar order1)
+        Users user;
+        public ZakazAdd(DemoMuhEntities context, OrderTovar order1,Users user1)
         {
             InitializeComponent();
+            user = user1;
 
             db = context;
 
             if (order1 == null)
             {
-                order = new OrderTovar();
+                ordertovar = new OrderTovar();
                 isNew = true;
                 ComboBoxAddress.ItemsSource = db.Addresses.ToList();
                 ComboBoxStatus.ItemsSource = db.Statuses.ToList();
+                ComboBoxArticul.ItemsSource = db.OrderTovar.ToList();
             }
             else
             {                
-                order = order1;
+                ordertovar = order1;
                 isNew = false;
-                TextBoxArticul.Text = order1.Articul;
+
+                ComboBoxArticul.ItemsSource = db.Tovar.ToList();
+                ComboBoxArticul.Text = order1.Articul;
+
                 ComboBoxAddress.ItemsSource = db.Addresses.ToList();
-                ComboBoxAddress.ItemsSource = db.Addresses.Where(p => p.IDAddress == order1.Orders.AddressDilivery).ToList();
-                ComboBoxStatus.ItemsSource = order1.Orders.Status;
+                ComboBoxAddress.Text = order1.Orders.Addresses.Address;
+
+                ComboBoxStatus.ItemsSource = db.Statuses.ToList();
+                ComboBoxStatus.Text = order1.Orders.Status.ToString();
+
                 DPDateDilivery.SelectedDate = order1.Orders.DateDilivery;
                 DPDateOrder.SelectedDate = order1.Orders.DateOrder;                    
             }
@@ -54,25 +65,46 @@ namespace WpfApp1.Okna
         {
             try
             {
-
                 if (isNew)
                 {
-                    order.Articul = (TextBoxArticul.Text.Trim());
+                    Orders order = new Orders
+                    {
+                        IDOrder = db.Orders.Max(p => p.IDOrder) + 1,
+                        DateOrder = DPDateOrder.SelectedDate,
+                        DateDilivery = DPDateDilivery.SelectedDate,
+                        AddressDilivery = ComboBoxAddress.SelectedIndex + 1,
+                        Status = ComboBoxStatus.Text.ToString(),
+                        IDUser = user.IDUser
+                    };
+
+                    OrderTovar newordertovar = new OrderTovar
+                    {
+                        IDOrder = order.IDOrder,
+                        Count = 1,
+                        Articul = (ComboBoxArticul.Text.Trim())
+                    };
+                    db.Orders.Add(order);
+
+                    db.SaveChanges();
+                    db.OrderTovar.Add(newordertovar);
+
+                    db.SaveChanges();
                 }
-                order.Articul = TextBoxArticul.Text;
-                //order.Orders.Status = db.Statuses.Where(p=> p.Status == ComboBoxStatus.Text.ToString());
-                order.Orders.AddressDilivery = ComboBoxAddress.SelectedIndex;
-                order.Orders.DateOrder = DPDateOrder.SelectedDate;
-                order.Orders.DateDilivery = DPDateDilivery.SelectedDate;
-
-                if (isNew)
+                else
                 {
-                    db.OrderTovar.Add(order);
+                    ordertovar.Articul = ComboBoxArticul.Text;
+                    ordertovar.Orders.Status = ComboBoxStatus.SelectedItem.ToString();
+                    ordertovar.Orders.AddressDilivery = ComboBoxAddress.SelectedIndex + 1;
+                    ordertovar.Orders.DateOrder = DPDateOrder.SelectedDate;
+                    ordertovar.Orders.DateDilivery = DPDateDilivery.SelectedDate;
                 }
                 db.SaveChanges();
                 Close();
             }
-            catch { }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
     }

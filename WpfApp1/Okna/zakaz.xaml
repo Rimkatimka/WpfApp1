@@ -28,8 +28,9 @@
 
             <Button Style="{StaticResource dd}" Margin="10" Content="Добавить" Height="30" Click="AddButtonClick"/>
             <Button Style="{StaticResource dd}" Margin="10" Content="Редактировать" Height="30" Click="AddButtonClick"/>
+            <Button Style="{StaticResource dd}" Margin="10" Content="Удаление" Height="30" Click="DeleteButtonc"/>
         </StackPanel>
-        <ListView Grid.Row="1" Grid.Column="1" x:Name="ZakazList" HorizontalContentAlignment="Stretch">
+        <ListView Grid.Row="1" Grid.Column="1" x:Name="ZakazList" HorizontalContentAlignment="Stretch" MouseDoubleClick="ZakazList_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="3" BorderBrush="Black">

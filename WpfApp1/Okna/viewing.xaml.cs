@@ -11,10 +11,11 @@ namespace WpfApp1.Okna
     {
         DemoMuhEntities db = new();
         private List<Tovar> allTovars; // Кэшируем все товары для производительности
-
+        private Users user1;
         public viewing(Users user)
         {
             InitializeComponent();
+            user1 = user;
             AddButton.Visibility = Visibility.Hidden;
             ResetButton.Visibility = Visibility.Hidden;
             DeleteButton.Visibility = Visibility.Hidden;
@@ -164,7 +165,7 @@ namespace WpfApp1.Okna
 
         private void ZakazButton_Click(object sender, RoutedEventArgs e)
         {
-            zakaz win = new zakaz();
+            zakaz win = new zakaz(user1);
             win.Show();
             Close();
         }

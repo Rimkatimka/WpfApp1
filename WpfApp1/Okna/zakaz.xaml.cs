@@ -23,12 +23,18 @@ namespace WpfApp1.Okna
     public partial class zakaz : Window
     {
         DemoMuhEntities db = new();
-        public zakaz()
+        Users user;
+        public zakaz(Users user1)
         {
+            user = user1;
             InitializeComponent();
+            Update();
+        }
+        public void Update()
+        {
+            ZakazList.ItemsSource = null;
             ZakazList.ItemsSource = db.OrderTovar.ToList();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
@@ -39,7 +45,37 @@ namespace WpfApp1.Okna
 
         private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            new ZakazAdd(db,ZakazList.SelectedItem as OrderTovar).ShowDialog();
+            new ZakazAdd(db, null,user).ShowDialog();
+        }
+
+        private void ZakazList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new ZakazAdd(db, ZakazList.SelectedItem as OrderTovar,user).ShowDialog();
+            Update();
+        }
+        private void DeleteButtonc(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ZakazList.SelectedItem is OrderTovar selected)
+                {
+                    if (MessageBox.Show("Точно хотите удалитьб?", "Подтверждение", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                    {
+                        try
+                        {
+
+                            db.OrderTovar.Remove(selected);
+                            db.SaveChanges();
+                            Update();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+            }
+            catch { }
         }
     }
 }

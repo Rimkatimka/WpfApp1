@@ -8,8 +8,10 @@
         Title="ZakazAdd" Height="750" Width="400">
     <Grid>
         <StackPanel>
+
             <TextBlock Text="Артикул" FontSize="18" Margin="10"/>
-            <TextBox x:Name="TextBoxArticul"  Height="40"/>
+            <ComboBox x:Name="ComboBoxArticul"  Height="40" DisplayMemberPath="Articul"/>
+            <!--<TextBox x:Name="TextBoxArticul"  Height="40"/>-->
 
             <TextBlock Text="Статус заказа" FontSize="18" Margin="10"/>
             <ComboBox x:Name="ComboBoxStatus"  Height="40" DisplayMemberPath="Status"/>
